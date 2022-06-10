@@ -8,7 +8,8 @@ module.exports = function login(req, res) {
 
   const user = userRepository.find(user_id, (user) => {
     if (user && user.verifyPassword(password)) {
-      res.render('top.ejs', { name: user.name })
+      req.session.user = user
+      res.redirect('/')
     } else {
       res.render('login.ejs', {
         message: 'ユーザーIDまたはパスワードに誤りがあります。'
