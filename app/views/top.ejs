@@ -1,10 +1,10 @@
 <html>
   <body>
     ようこそ <%= name %> さん
-    <% for (let c of contents) { %>
-      <ul>
-        <li><a href="/download?name=<%= c.name %>"><%= c.name %>(<%= c.size %>)</a></li>
-      </ul>
-    <% } %>
+    <ul>
+    <% contents.forEach(c => {%>
+      <li><a href="/download?name=<%= c.name %>"><%= c.name %>(<%= c.size %>)</a></li>
+    <% }) %>
+    </ul>
   </body>
 </html>
