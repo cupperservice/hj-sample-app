@@ -28,7 +28,7 @@ app.use('/', session({
 
 app.set('view engine', 'ejs')
 
-app.all('/', logger)
+app.all('/*', logger)
 
 app.get('/', auth, top)
 
