@@ -1,0 +1,14 @@
+db:
+  host: localhost
+  port: 3306
+  user_id: root
+  password: root
+  name: mydb
+session:
+  name: login.session
+  secret: login.session,
+  cookie:
+    path: /
+    secure: false
+  store:
+    table: session-table

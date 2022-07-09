@@ -1,13 +1,14 @@
 const mysql = require('mysql')
 const User = require('../model/user')
+const config = require('config')
 
 module.exports = () => {
   const connection = mysql.createConnection({
-    host: 'localhost',
-    port: 3306,
-    user: 'root',
-    password: 'root',
-    database: 'mydb'
+    host: config.db.host,
+    port: config.db.port,
+    user: config.db.user_id,
+    password: config.db.password,
+    database: config.db.name
   })
     
   return {

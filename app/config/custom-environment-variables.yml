@@ -1,0 +1,14 @@
+db:
+  host: DB_HOST
+  port: DB_PORT
+  user_id: DB_USER_ID
+  password: DB_PASSWORD
+  name: DB_NAME
+session:
+  name: SESSION_NAME
+  secret: SESSION_SECRET,
+  cookie:
+    path: SESSION_COOKIE_PATH
+    secure: SESSION_COOKIE_SECURE
+  store:
+    table: SESSION_STORE_TABLE
