@@ -12,3 +12,5 @@ session:
     secure: false
   store:
     table: session-table
+s3:
+  bucket_name: cupper-hj-test

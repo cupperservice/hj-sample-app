@@ -1,14 +1,13 @@
-const crypto = require('crypto')
+const Password = require('./password')
 
 module.exports = class User {
-  constructor(login_id, password, name) {
+  constructor(login_id, hashedPassword, name) {
     this.login_id = login_id
-    this.password = password
+    this.hashedPassword = hashedPassword
     this.name = name
   }
 
-  verifyPassword(password) {
-    const hashedPass = crypto.createHash('sha256').update(password).digest('hex')
-    return this.password === hashedPass
+  verifyPassword(plainPassword) {
+    return this.hashedPassword.value() === Password.hashedPassword(plainPassword).value()
   }
 }

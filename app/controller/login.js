@@ -1,19 +1,21 @@
-const crypto = require('crypto')
-const User = require('../model/user')
-const userRepository = require('../repository/user_repository')()
+const useCase = require('../usecase/login')
 
 module.exports = function login(req, res) {
-  const user_id = req.body.user_id
-  const password = req.body.password
-
-  const user = userRepository.find(user_id, (user) => {
-    if (user && user.verifyPassword(password)) {
-      req.session.user = user
-      res.redirect('/')
-    } else {
-      res.render('login.ejs', {
-        message: 'ユーザーIDまたはパスワードに誤りがあります。'
-      })
-    }  
+  return new Promise((resolve, reject) => {
+    resolve({
+      user_id: req.body.user_id,
+      password: req.body.password
+    })
+  })
+  .then(useCase)
+  .then(user => {
+    req.session.user = user
+    res.redirect('/')
+  })
+  .catch(err => {
+    console.log(err)
+    res.render('login.ejs', {
+      message: 'ユーザーIDまたはパスワードに誤りがあります。'
+    })
   })
 }

@@ -1,5 +1,6 @@
 const mysql = require('mysql')
 const User = require('../model/user')
+const Password  = require('../model/password')
 const config = require('config')
 
 module.exports = () => {
@@ -22,10 +23,19 @@ module.exports = () => {
           if (err) throw err
 
           if (results.length === 1) {
-            fn(new User(results[0].login_id, results[0].password, results[0].name))
+            fn(new User(results[0].login_id, new Password(results[0].password), results[0].name))
           } else {
             fn(null)
           }
+        }
+      )
+    },
+    register: (user, callback) => {
+      connection.query(
+        'INSERT INTO user(user_id, password, name) VALUES(?, ?, ?)', [user.login_id, user.hashedPassword.value(), user.name],
+        (err, result, fields) => {
+          if (err) throw err
+          callback(result)
         }
       )
     },

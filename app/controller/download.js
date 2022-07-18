@@ -1,10 +1,9 @@
-const { S3, GetObjectCommand } = require('@aws-sdk/client-s3')
+const fileRepository = require('../repository/file_repository')()
 
 module.exports = function(req, res) {
-  const client = new S3()
   const fileName = req.query.name
 
-  client.send(new GetObjectCommand({ Bucket: 'cupper-hj-test', Key: fileName }))
+  fileRepository.download(fileName)
     .then(data => {
       res.attachment(fileName)
       data.Body.pipe(res)

@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <title>アルバム</title>
+    <script src="scripts/lib.js"></script>
+  </head>
+  <body>
+    <div><%= message %></div>
+
+    <div>
+      <h1>ファイルアップロード</h1>
+      <form action="/upload" method="POST" enctype="multipart/form-data" accept-charset="utf-8">
+        <input type="file" name="file" />
+        <button type="submit">アップロード</button>
+      </form>
+    </div>
+
+    <div>
+      ようこそ <%= name %> さん
+      <ul>
+      <% contents.forEach(c => {%>
+        <li><a href="/download?name=<%= c.name %>"><%= c.name %>(<%= c.size %>)</a></li>
+      <% }) %>
+      </ul>  
+    </div>
+  </body>
+</html>
