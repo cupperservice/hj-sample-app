@@ -9,7 +9,7 @@ const top = require('./controller/top')
 const download = require('./controller/download')
 const after_upload = require('./controller/upload')
 const DynamoDBStore = require('connect-dynamodb')({ session: session })
-const logger = require('./service/logger')
+const logger = require('./service/logger')()
 const config = require('config')
 
 const app = express()
@@ -33,7 +33,7 @@ app.use('/', session({
 
 app.set('view engine', 'ejs')
 
-app.all('/*', logger)
+// app.all('/*', logger)
 
 app.get('/', auth, top)
 
@@ -42,10 +42,10 @@ app.post('/login', login)
 app.get('/download', auth, download)
 
 const multer = require('multer')
-const upload = multer({ dest: `${__dirname}/public/uploads` })
+const upload = multer({ dest: `${__dirname}/../${config.image.upload.dir}` })
 app.post('/upload', auth, upload.single('file'), after_upload)
 
 app.listen(8080, (err) => {
   if (err) throw err
-  console.log('Server is started')
+  logger.info('Server is started')
 })

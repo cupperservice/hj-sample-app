@@ -12,11 +12,11 @@ module.exports = () => {
         Key: fileName
       }))
     },
-    upload: (file) => {
-      const fileStream = fs.createReadStream(file.path)
+    upload: (image) => {
+      const fileStream = fs.createReadStream(image.uploadFilePath())
       return client.send(new PutObjectCommand({
         Bucket: config.s3.bucket_name,
-        Key: file.originalname,
+        Key: image.name,
         Body: fileStream
       }))
     }

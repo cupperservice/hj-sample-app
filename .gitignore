@@ -2,3 +2,5 @@ node_modules/
 services/db/data/
 public/uploads/
 public/thumbnail/
+logs/
+

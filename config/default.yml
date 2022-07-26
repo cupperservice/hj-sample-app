@@ -14,3 +14,10 @@ session:
     table: session-table
 s3:
   bucket_name: cupper-hj-test
+image:
+  upload:
+    dir: public/uploads
+  thumbnail:
+    dir: public/thumbnail
+logger:
+  file: logs/application.log
