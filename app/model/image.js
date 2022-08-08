@@ -1,5 +1,11 @@
 const config = require('config')
 const mime = require('mime')
+const fs = require('fs')
+const thumbnail = require('image-thumbnail');
+const options = {
+  width: 100,
+  height: 100,
+}
 
 module.exports = class Image {
   constructor(name, mimeType) {
@@ -7,12 +13,16 @@ module.exports = class Image {
     this.mimeType = mimeType
   }
 
-  uploadFilePath() {
-    return `${__dirname}/../../${config.image.upload.dir}/${this.name}`
+  imageFileStream() {
+    return fs.createReadStream(this.uploadFilePath())
   }
 
-  thumbnailFilePath() {
-    return `${__dirname}/../../${config.image.thumbnail.dir}/${this.name}.${this.ext()}`
+  thumbnailFileStream() {
+    return thumbnail(this.uploadFilePath(), options)
+  }
+
+  uploadFilePath() {
+    return `${__dirname}/../../${config.image.upload.dir}/${this.name}`
   }
 
   ext() {

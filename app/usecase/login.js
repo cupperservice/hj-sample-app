@@ -1,6 +1,6 @@
 const userRepository = require('../repository/user_repository')()
 
-module.exports = function login(params) {
+module.exports = (params) => {
   return new Promise((resolve, reject) => {
     userRepository.find(params.user_id, (user) => {
       if (user && user.verifyPassword(params.password)) {

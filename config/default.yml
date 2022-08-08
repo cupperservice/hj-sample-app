@@ -13,7 +13,10 @@ session:
   store:
     table: session-table
 s3:
-  bucket_name: cupper-hj-test
+  original:
+    bucket_name: hj-202208-image-original
+  thumbnail:
+    bucket_name: hj-202208-image-thumbnail
 image:
   upload:
     dir: public/uploads

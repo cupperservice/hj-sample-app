@@ -1,13 +1,10 @@
-const useCase = require('../usecase/login')
+const loginUseCase = require('../usecase/login')
 
 module.exports = function login(req, res) {
-  return new Promise((resolve, reject) => {
-    resolve({
-      user_id: req.body.user_id,
-      password: req.body.password
-    })
+  return loginUseCase({
+    user_id: req.body.user_id,
+    password: req.body.password
   })
-  .then(useCase)
   .then(user => {
     req.session.user = user
     res.redirect('/')
