@@ -1,6 +1,8 @@
 const config = require('config')
 const logger = require('pino')(`${__dirname}/../../${config.logger.file}`)
 const moment = require('moment')
+const pump = require('pump')
+const pinoCloudWatch = require('pino-cloudwatch')
 
 module.exports = () => {
   return {
@@ -15,6 +17,3 @@ module.exports = () => {
     }
   }
 }
-//   console.log(`[${moment().format("YYYY-MM-DD HH:mm:ssZ")}] ${req.method} ${req.path}`)
-//   next()
-// }

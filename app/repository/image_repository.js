@@ -1,55 +1,44 @@
-const { S3, PutObjectCommand, GetObjectCommand, ListObjectsCommand } = require('@aws-sdk/client-s3')
-const fs = require('fs')
-const s3 = require('../service/s3_service')
-const config = require('config').s3
+const mysql = require('mysql')
+const config = require('config')
+const Image = require('../model/image')
 
 module.exports = () => {
-  const client = new S3()
-  const originalBucket = config.original.bucket_name
-  const thumbnailBucket = config.thumbnail.bucket_name
+  const connection = mysql.createConnection({
+    host: config.db.host,
+    port: config.db.port,
+    user: config.db.user_id,
+    password: config.db.password,
+    database: config.db.name
+  })    
 
   return {
-    list: () => {
-      return client.send(new ListObjectsCommand({ Bucket: thumbnailBucket }))
-      .then(data => {
-        const contents = []
-        if (data.Contents) {
-          data.Contents.forEach(o => {
-            contents.push({
-              name: o.Key,
-              size: o.Size,
-              thumbnailUrl: () => {
-                return `https://${thumbnailBucket}.s3.amazonaws.com/${o.Key}`
-              },
-              originalUrl: () => {
-                return `https://${originalBucket}.s3.amazonaws.com/${o.Key}`
-              }
-            })
-          })
-        }
-        return contents
-      })    
+    save: (image, callback) => {
+        connection.query(
+            'INSERT INTO image(name, size, comment) VALUES(?,?,?)', [image.name, image.size, image.comment],
+            (err, result) => {
+                if (err) throw err
+                callback(result)
+            }
+        )
     },
-    download: (fileName) => {
-      return client.send(new GetObjectCommand({
-        Bucket: originalBucket,
-        Key: fileName
-      }))
-    },
-    uploadOriginal: (image) => {
-      return client.send(new PutObjectCommand({
-        Bucket: originalBucket,
-        Key: image.name,
-        Body: image.imageFileStream()
-      }))
-    },
-    uploadThumbnail: async (image) => {
-      const stream = await image.thumbnailFileStream()
-      await client.send(new PutObjectCommand({
-        Bucket: thumbnailBucket,
-        Key: image.name,
-        Body: stream
-      }))
+    allImages: (callback) => {
+        return new Promise((resolve, reject) => {
+            connection.query(
+                `SELECT name, size, comment FROM image`,
+                (err, result, fields) => {
+                    if (err) throw err
+    
+                    for(let i = 0; i < result.length; i++) {
+                        callback(new Image({
+                            name: result[i].name,
+                            size: result[i].size,
+                            comment: result[i].comment
+                        }))
+                    }
+                    resolve()
+                }
+            )
+        })
     }
   }
 }

@@ -16,16 +16,16 @@ module.exports = () => {
     connect: () => {
       connection.connect()
     },
-    find: (user_id, fn) => {
+    find: (user_id, callback) => {
       connection.query(
         `SELECT user_id, password, name FROM user WHERE user_id = ?`, [user_id],
         (err, results, fields) => {
           if (err) throw err
 
           if (results.length === 1) {
-            fn(new User(results[0].login_id, new Password(results[0].password), results[0].name))
+            callback(new User(results[0].login_id, new Password(results[0].password), results[0].name))
           } else {
-            fn(null)
+            callback(null)
           }
         }
       )

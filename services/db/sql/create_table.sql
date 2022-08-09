@@ -1,21 +1,15 @@
 CREATE TABLE user (
-  id          INTEGER AUTO_INCREMENT,
-  user_id     VARCHAR(50) NOT NULL,
+  id          INTEGER      AUTO_INCREMENT,
+  user_id     VARCHAR(50)  NOT NULL UNIQUE,
   password    VARCHAR(100) NOT NULL,
   name        VARCHAR(100) NOT NULL,
   PRIMARY KEY (id)
 );
 
-CREATE TABLE word (
-  id          INT NOT NULL AUTO_INCREMENT,
-  content     VARCHAR(50) NOT NULL,
-  created_at  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (id)
-);
-
 CREATE TABLE image (
-  id          INT NOT NULL AUTO_INCREMENT,
-  name        VARCHAR(100) NOT NULL,
+  id          INT          NOT NULL AUTO_INCREMENT,
+  name        VARCHAR(100) NOT NULL UNIQUE,
+  size        INT          NOT NULL,
+  comment     VARCHAR(100) NOT NULL,
   PRIMARY KEY (id)
 );

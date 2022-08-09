@@ -1,7 +1,7 @@
-const getImagesUseCase = require('../usecase/getImages')
+const getImagesUseCase = require('../usecase/get_images')
 
 module.exports = function top(req, res) {
-  getImagesUseCase().then(contents => {
+  return getImagesUseCase().then(contents => {
     const user = req.session.user
     const message = req.query.message
     res.render('top.ejs', {

@@ -27,6 +27,9 @@
         <h3>ファイルアップロード</h3>
         <form action="/upload" method="POST" enctype="multipart/form-data" accept-charset="utf-8">
           <input class="btn btn-large" type="file" name="file" />
+          <div class="input-field">
+            <input placeholder="Any Comments" type="text" name="comment" />
+          </div>
           <button class="btn waves-effect waves-light btn-large" type="submit" name="action">
             Upload
             <i class="material-icons right">send</i>
@@ -34,15 +37,18 @@
         </form>
       </div>  
 
-      <div>
+      <div class="card-panel">
         <ul class="collection">
         <% contents.forEach((c, i, a) => {%>
-          <li class="collection-item">
-            <a class="waves-effect waves-light modal-trigger" href="#modal-<%= i %>">
+          <li class="collection-item row">
+            <a class="waves-effect waves-light modal-trigger col l1" href="#modal-<%= i %>">
               <img src="<%= c.thumbnailUrl() %>">
             </a>
-            <%= c.size %>
-          </li>
+            <span class="col l11">
+              <div class="row l6"><%= c.comment %></div>
+              <div class="row l6"><%= c.size %></div>  
+            </span>
+        </li>
         <% }) %>
         </ul>
       </div>
@@ -51,12 +57,12 @@
     </div>
 
     <% contents.forEach((c, i, a) => { %>
-      <div id="modal-<%= i %>" class="modal">
+      <div id="modal-<%= i %>" class="modal container">
         <a class="waves-effect waves-light btn" href="/download?name=<%= c.name %>">
           <i class="material-icons">cloud</i>Download
         </a>
         <div class="modal-content">
-          <img src="<%= c.originalUrl() %>">
+          <img class="responsive-img" src="<%= c.originalUrl() %>">
         </div>
       </div>
     <% }) %>

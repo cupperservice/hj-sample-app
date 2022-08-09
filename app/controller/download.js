@@ -1,9 +1,9 @@
-const imageRepository = require('../repository/image_repository')()
+const downloadUseCase = require('../usecase/download')
 
 module.exports = function(req, res) {
   const fileName = req.query.name
 
-  imageRepository.download(fileName)
+  downloadUseCase(fileName)
     .then(data => {
       res.attachment(fileName)
       data.Body.pipe(res)
