@@ -20,7 +20,5 @@ s3:
 image:
   upload:
     dir: public/uploads
-  thumbnail:
-    dir: public/thumbnail
 logger:
   file: logs/application.log
