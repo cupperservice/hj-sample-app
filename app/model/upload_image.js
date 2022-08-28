@@ -11,6 +11,8 @@ module.exports = class UploadImage {
   constructor(image) {
     this.image = image
     this.name = image.name
+    this.size = image.size
+    this.comment = image.comment
   }
 
   imageFileStream() {
