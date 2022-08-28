@@ -27,7 +27,8 @@ app.use('/', session({
     secure: config.session.secure
   },
   store: new DynamoDBStore({
-    table: config.session.store.table
+    table: config.session.store.table,
+    hashKey: config.session.name
   })
 }))
 
