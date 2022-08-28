@@ -8,6 +8,7 @@ const login = require('./controller/login')
 const top = require('./controller/top')
 const download = require('./controller/download')
 const after_upload = require('./controller/upload')
+const health_check = require('./controller/health_check')
 const DynamoDBStore = require('connect-dynamodb')({ session: session })
 const logger = require('./service/logger')()
 const config = require('config')
@@ -41,6 +42,8 @@ app.get('/', auth, top)
 app.post('/login', login)
 
 app.get('/download', auth, download)
+
+app.get('/health/check', health_check)
 
 const multer = require('multer')
 const upload = multer({ dest: `${__dirname}/../${config.image.upload.dir}` })
