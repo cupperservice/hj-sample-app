@@ -10,7 +10,7 @@ module.exports = (bucket) => {
       .then(data => {
         const contents = []
         if (data.Contents) {
-          data.Contents.forEach(o => { console.log(o); contents.push({ name: o.Key, size: o.Size })})
+          data.Contents.forEach(o => { contents.push({ name: o.Key, size: o.Size })})
         }
         return contents
       })    
