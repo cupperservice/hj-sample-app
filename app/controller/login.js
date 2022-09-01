@@ -1,4 +1,6 @@
+const config = require('config')
 const loginUseCase = require('../usecase/login')
+const logger = require('../service/logger')(config.logger.file)
 
 module.exports = function login(req, res) {
   return loginUseCase({
@@ -10,7 +12,7 @@ module.exports = function login(req, res) {
     res.redirect('/')
   })
   .catch(err => {
-    console.log(err)
+    logger.error(err)
     res.render('login.ejs', {
       message: 'ユーザーIDまたはパスワードに誤りがあります。'
     })

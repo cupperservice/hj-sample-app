@@ -1,19 +1,17 @@
 const config = require('config')
-const logger = require('pino')(`${__dirname}/../../${config.logger.file}`)
 const moment = require('moment')
-const pump = require('pump')
-const pinoCloudWatch = require('pino-cloudwatch')
 
-module.exports = () => {
+module.exports = (file) => {
+  const logger = require('pino')(`${__dirname}/../../${file}`)
   return {
     info: (msg) => {
       logger.info(msg)
     },
-    error: (err, msg) => {
-
+    error: (err) => {
+      logger.error(err)
     },
     debug: (msg) => {
-
+      logger.debug(msg)
     }
   }
 }

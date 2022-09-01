@@ -23,3 +23,5 @@ image:
     dir: public/uploads
 logger:
   file: logs/application.log
+request_logger:
+  file: logs/access.log
