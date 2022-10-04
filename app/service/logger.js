@@ -1,6 +1,17 @@
+const config = require('config')
 const moment = require('moment')
 
-module.exports = function(req, res, next) {
-  console.log(`[${moment().format("YYYY-MM-DD HH:mm:ssZ")}] ${req.method} ${req.path}`)
-  next()
+module.exports = (file) => {
+  const logger = require('pino')(`${__dirname}/../../${file}`)
+  return {
+    info: (msg) => {
+      logger.info(msg)
+    },
+    error: (err) => {
+      logger.error(err)
+    },
+    debug: (msg) => {
+      logger.debug(msg)
+    }
+  }
 }

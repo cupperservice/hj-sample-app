@@ -1,0 +1,7 @@
+[Unit]
+Description = launch application server
+
+[Service]
+User=ec2-user
+ExecStartPre=/usr/bin/bash /opt/appsvr/scripts/ssm-param-pre-exec.sh
+ExecStart=/usr/bin/bash /opt/appsvr/scripts/start.sh

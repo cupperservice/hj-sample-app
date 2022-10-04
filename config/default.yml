@@ -1,0 +1,27 @@
+region: us-east-1
+db:
+  host: localhost
+  port: 3306
+  user_id: root
+  password: root
+  name: mydb
+session:
+  name: login.session
+  secret: login.session,
+  cookie:
+    path: /
+    secure: false
+  store:
+    table: session-table
+s3:
+  original:
+    bucket_name: hj-202208-image-original
+  thumbnail:
+    bucket_name: hj-202208-image-thumbnail
+image:
+  upload:
+    dir: public/uploads
+logger:
+  file: logs/application.log
+request_logger:
+  file: logs/access.log

@@ -1,12 +1,13 @@
-const { S3, ListObjectsCommand } = require('@aws-sdk/client-s3')
+const getImagesUseCase = require('../usecase/get_images')
 
 module.exports = function top(req, res) {
-  const client = new S3()
-
-  client.send(new ListObjectsCommand({ Bucket: 'cupper-hj-test' }))
-  .then(data => {
-    const contents = data.Contents.map(o => { return { name: o.Key, size: o.Size } })
+  return getImagesUseCase().then(contents => {
     const user = req.session.user
-    res.render('top.ejs', { name: user.name, contents: contents })  
+    const message = req.query.message
+    res.render('top.ejs', {
+      name: user.name,
+      contents: contents,
+      message: message
+    })
   })
 }
