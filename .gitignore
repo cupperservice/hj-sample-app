@@ -1,6 +1,7 @@
 node_modules/
 services/db/data/
+services/localstack/
 public/uploads/
 public/thumbnail/
-logs/
+logs/*
 

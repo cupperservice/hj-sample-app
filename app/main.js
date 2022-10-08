@@ -13,6 +13,9 @@ const DynamoDBStore = require('connect-dynamodb')({ session: session })
 const config = require('config')
 const logger = require('./service/logger')(config.logger.file)
 const request_logger = require('./service/request_logger')
+const AWS = require('aws-sdk')
+
+AWS.config.update({ region: config.region })
 
 const app = express()
 
@@ -31,7 +34,8 @@ app.use('/', session({
   store: new DynamoDBStore({
     table: config.session.store.table,
     hashKey: config.session.name,
-    region: config.region
+    region: config.region,
+    client: new AWS.DynamoDB({ endpoint: process.env.AWS_ENDPOINT ? `http://${process.env.AWS_ENDPOINT}` : undefined })
   })
 }))
 

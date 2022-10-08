@@ -2,6 +2,7 @@ version: '3.3'
 services:
   db:
     image: mysql:5.7
+    platform: linux/amd64
     container_name: db
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -16,3 +17,14 @@ services:
     ports:
       - "3306:3306"
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+  localstack:
+    container_name: "${LOCALSTACK_DOCKER_NAME-localstack_main}"
+    image: localstack/localstack
+    ports:
+      - "4566:4566"
+      - "4510-4559:4510-4559"
+    environment:
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - "./services/localstack:/tmp/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"

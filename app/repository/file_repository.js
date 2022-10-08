@@ -4,7 +4,7 @@ const s3 = require('../service/s3_service')
 const config = require('config').s3
 
 module.exports = () => {
-  const client = new S3()
+  const client = new S3({ endpoint: process.env.AWS_ENDPOINT ? `http://${process.env.AWS_ENDPOINT}` : undefined })
   const originalBucket = config.original.bucket_name
   const thumbnailBucket = config.thumbnail.bucket_name
 

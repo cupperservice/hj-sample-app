@@ -12,8 +12,10 @@ session:
     secure: SESSION_COOKIE_SECURE
   store:
     table: SESSION_TABLE_NAME
+    endpoint: AWS_ENDPOINT
 s3:
   original:
     bucket_name: S3_BUCKET_NAME_ORIGINAL
   thumbnail:
     bucket_name: S3_BUCKET_NAME_THUMBNAIL
+  endpoint: AWS_ENDPOINT

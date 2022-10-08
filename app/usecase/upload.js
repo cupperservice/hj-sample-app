@@ -8,6 +8,6 @@ module.exports = async (file, comment) => {
 
   await imageRepository.save(image, async () => {
     await fileRepository.uploadOriginal(image)
-    await fileRepository.uploadThumbnail(image)  
+    await fileRepository.uploadThumbnail(image)
   })
 }
