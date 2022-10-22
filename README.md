@@ -11,9 +11,9 @@
 # ローカル環境での実行方法
 ## 事前準備
 1. 以下がインストールされていること
-    * Docker
-    * Docker Compose
-    * AWS CLI
+    * Docker(Cloud9ではインストール済み)
+    * Docker Compose([Cloud9でもインストールが必要](./HowToInstallDc.md))
+    * AWS CLI(Cloud9ではインストール済み)
 
 2. LocalStack用のAWSプロファイルの作成
 
