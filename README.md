@@ -56,7 +56,8 @@
   * hj-202208-image-original  
   `aws --endpoint-url=http://localhost:4566 --profile localstack s3api put-bucket-policy --bucket hj-202208-image-thumbnail --policy file://services/bucket-policy/thumbnail-policy.json`
 
-## Lambdaの登録
+## 必要なモジュールをインストール
+`npm install`
 
 ## アプリケーションの立ち上げ
 `npm run start-local`

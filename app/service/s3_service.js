@@ -10,10 +10,10 @@ module.exports = () => {
         Key: fileName
       }))
     },
-    upload: (bucket, stream) => {
+    upload: (bucket, key, stream) => {
       return client.send(new PutObjectCommand({
         Bucket: bucket,
-        Key: image.name,
+        Key: key,
         Body: stream
       }))
     }

@@ -10,11 +10,11 @@ module.exports = () => {
       return s3.download(originalBucket, fileName)
     },
     uploadOriginal: (image) => {
-      return s3.upload(originalBucket, image.imageFileStream())
+      return s3.upload(originalBucket, image.name, image.imageFileStream())
     },
     uploadThumbnail: async (image) => {
       const stream = await image.thumbnailFileStream()
-      return s3.upload(thumbnailBucket, stream)
+      return s3.upload(thumbnailBucket, image.name, stream)
     }
   }
 }
