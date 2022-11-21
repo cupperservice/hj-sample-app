@@ -39,6 +39,23 @@ module.exports = () => {
                 }
             )
         })
+    },
+    init: () => {
+        return new Promise((resolve, reject) => {
+            connection.query(
+                'CREATE TABLE IF NOT EXISTS image (\
+                    id          INT          NOT NULL AUTO_INCREMENT,\
+                    name        VARCHAR(100) NOT NULL UNIQUE,\
+                    size        INT          NOT NULL,\
+                    comment     VARCHAR(100) NOT NULL,\
+                    PRIMARY KEY (id)\
+                )',
+                (err, result, fields) => {
+                  if (err) throw reject(err)
+                  resolve(result)
+                }
+            )  
+        })
     }
   }
 }

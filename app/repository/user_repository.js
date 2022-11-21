@@ -41,6 +41,23 @@ module.exports = () => {
     },
     close: () => {
       connection.end()
+    },
+    init: () => {
+      return new Promise((resolve, reject) => {
+        connection.query(
+          'CREATE TABLE IF NOT EXISTS user (\
+            id          INTEGER      AUTO_INCREMENT,\
+            user_id     VARCHAR(50)  NOT NULL UNIQUE,\
+            password    VARCHAR(100) NOT NULL,\
+            name        VARCHAR(100) NOT NULL,\
+            PRIMARY KEY (id)\
+          )',
+          (err, result, fields) => {
+            if (err) throw reject(err)
+            resolve(result)
+          }
+        )  
+      })
     }
   }
 }
