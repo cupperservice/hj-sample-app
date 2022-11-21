@@ -16,5 +16,7 @@ userRepository.init()
       userRepository.register(new User(u[0], Password.hashedPassword(u[1]), u[2]), (result) => {
         console.log(`[${u[0]}] is registered`)
       })
-    })    
+    })
+    userRepository.close()
+    imageRepository.close()  
   }))

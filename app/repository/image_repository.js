@@ -40,6 +40,9 @@ module.exports = () => {
             )
         })
     },
+    close: () => {
+        connection.end()
+    },
     init: () => {
         return new Promise((resolve, reject) => {
             connection.query(
@@ -51,7 +54,7 @@ module.exports = () => {
                     PRIMARY KEY (id)\
                 )',
                 (err, result, fields) => {
-                  if (err) throw reject(err)
+                  if (err) reject(err)
                   resolve(result)
                 }
             )  

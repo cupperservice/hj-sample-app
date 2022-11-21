@@ -53,7 +53,7 @@ module.exports = () => {
             PRIMARY KEY (id)\
           )',
           (err, result, fields) => {
-            if (err) throw reject(err)
+            if (err) reject(err)
             resolve(result)
           }
         )  
