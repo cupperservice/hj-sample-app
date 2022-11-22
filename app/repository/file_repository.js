@@ -1,5 +1,6 @@
 const s3 = require('../service/s3_service')()
 const config = require('config').s3
+const thumbnail = require('../service/thumbnail')
 
 module.exports = () => {
   const originalBucket = config.original.bucket_name
@@ -13,8 +14,7 @@ module.exports = () => {
       return s3.upload(originalBucket, image.name, image.imageFileStream())
     },
     uploadThumbnail: async (image) => {
-      const stream = await image.thumbnailFileStream()
-      return s3.upload(thumbnailBucket, image.name, stream)
+      return thumbnail(image)
     }
   }
 }
