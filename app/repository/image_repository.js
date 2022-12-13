@@ -12,14 +12,16 @@ module.exports = () => {
   })    
 
   return {
-    save: (image, callback) => {
-        connection.query(
-            'INSERT INTO image(name, size, comment) VALUES(?,?,?)', [image.name, image.size, image.comment],
-            (err, result) => {
-                if (err) throw err
-                callback(result)
-            }
-        )
+    save: (image) => {
+        return new Promise((resolve, reject) => {
+            connection.query(
+                'INSERT INTO image(name, size, comment) VALUES(?,?,?)', [image.name, image.size, image.comment],
+                (err, result) => {
+                    if (err) reject(err)
+                    resolve(result)
+                }
+            )    
+        })
     },
     allImages: (callback) => {
         return new Promise((resolve, reject) => {

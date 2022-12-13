@@ -13,7 +13,7 @@ module.exports = () => {
     uploadOriginal: (image) => {
       return s3.upload(originalBucket, image.name, image.imageFileStream())
     },
-    uploadThumbnail: async (image) => {
+    uploadThumbnail: (image) => {
       return thumbnail(image)
     }
   }

@@ -6,8 +6,7 @@ const UploadImage = require('../model/upload_image')
 module.exports = async (file, comment) => {
   const image = new UploadImage(new Image({name: file.filename, size: file.size, comment: comment, mimeType: file.mimetype}))
 
-  await imageRepository.save(image, async () => {
-    await fileRepository.uploadOriginal(image)
-    await fileRepository.uploadThumbnail(image)
-  })
+  await imageRepository.save(image)
+  await fileRepository.uploadOriginal(image)
+  await fileRepository.uploadThumbnail(image)
 }
