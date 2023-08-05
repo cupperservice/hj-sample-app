@@ -4,4 +4,4 @@ services/localstack/
 public/uploads/
 public/thumbnail/
 logs/*.log
-
+.vscode/

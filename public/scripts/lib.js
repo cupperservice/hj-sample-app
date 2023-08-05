@@ -1,3 +1,0 @@
-function hoge() {
-  alert('ok')
-}

@@ -1,10 +1,13 @@
 region: us-east-1
+server:
+  port: 3000
+  host: localhost
 db:
   host: localhost
   port: 3306
-  user_id: root
-  password: root
-  name: mydb
+  username: docker
+  password: docker
+  database: mydb
 session:
   name: login.session
   secret: login.session,
@@ -15,9 +18,9 @@ session:
     table: session-table
 s3:
   original:
-    bucket_name: hj-202208-image-original
+    bucket: 'hj-202208-image-original'
   thumbnail:
-    bucket_name: hj-202208-image-thumbnail
+    bucket: 'hj-202208-image-thumbnail'
 image:
   upload:
     dir: public/uploads
