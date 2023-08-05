@@ -1,4 +1,4 @@
-import { userRepository } from '../app/repository/user_repository'
+import userRepository from '../app/repository/user_repository'
 import fs from 'fs'
 import { parse } from 'csv-parse/sync'
 import User from '../app/model/user'

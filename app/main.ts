@@ -44,7 +44,7 @@ app.get('/readiness', wrap(readiness))
 
 app.get('/', auth, wrap(top))
 app.post('/login', wrap(login))
-app.post('/upload', auth, multer({ dest: `${__dirname}/${config.image.upload.dir}` }).single('file'), wrap(after_upload))
+app.post('/upload', auth, multer({ dest: `${__dirname}/../${config.image.upload.dir}` }).single('file'), wrap(after_upload))
 app.get('/download', auth, wrap(download))
 
 const host = config.server.host
