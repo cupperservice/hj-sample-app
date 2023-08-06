@@ -26,6 +26,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-
 
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-region: us-east-1
+
       - uses: docker/login-action@v1
         with:
           registry: ${{ env.ECR_REGISTRY }}
