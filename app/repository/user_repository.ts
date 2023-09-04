@@ -1,6 +1,7 @@
 import { RowDataPacket } from 'mysql2/promise'
 import User from '../model/user'
 import Password from '../model/password'
+import Salt from '../model/salt'
 import connection from './db_connection'
 
 interface IUser extends RowDataPacket {
@@ -13,12 +14,13 @@ interface IUser extends RowDataPacket {
 class UserRepository {
   async find(login_id: string): Promise<User | null> {
     return connection<User | null>(async (conn) => {
-      const [rows, fields] = await conn.query<IUser[]>('SELECT login_id, password, name FROM user WHERE login_id = ?', [login_id])
+      const [rows, fields] = await conn.query<IUser[]>('SELECT login_id, password, salt, name FROM user WHERE login_id = ?', [login_id])
 
       if (rows.length === 1) {
         return new User(
           rows[0].login_id,
           new Password(rows[0].password),
+          new Salt(rows[0].salt),
           rows[0].name
         )
       } else {
@@ -29,7 +31,10 @@ class UserRepository {
 
   async register(user: User) {
     return connection<void>(async (conn) => {
-      await conn.execute('INSERT INTO user (login_id, password, name) VALUES (?, ?, ?)', [user.login_id, user.hashed_password.value(), user.name])
+      await conn.execute(
+        'INSERT INTO user (login_id, password, salt, name) VALUES (?, ?, ?, ?)',
+        [user.login_id, user.hashed_password.value(), user.salt.value(), user.name]
+      )
     })
   }
 
@@ -40,6 +45,7 @@ class UserRepository {
           id          INTEGER      AUTO_INCREMENT,\
           login_id    VARCHAR(50)  NOT NULL UNIQUE,\
           password    VARCHAR(100) NOT NULL,\
+          salt        VARCHAR(20)  NOT NULL,\
           name        VARCHAR(100) NOT NULL,\
           PRIMARY KEY (id)\
         )'

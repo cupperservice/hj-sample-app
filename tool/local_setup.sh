@@ -14,4 +14,4 @@ aws --endpoint-url=http://localhost:4566 --profile localstack s3api put-bucket-p
 
 aws --endpoint-url=http://localhost:4566 --profile localstack s3api put-bucket-policy --bucket hj-202208-image-thumbnail --policy file://services/bucket-policy/thumbnail-policy.json
 
-npm install
+yarn install

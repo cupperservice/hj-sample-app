@@ -2,6 +2,7 @@ CREATE TABLE user (
   id          INTEGER      AUTO_INCREMENT,
   login_id    VARCHAR(50)  NOT NULL UNIQUE,
   password    VARCHAR(100) NOT NULL,
+  salt        VARCHAR(20)  NOT NULL,
   name        VARCHAR(100) NOT NULL,
   PRIMARY KEY (id)
 );
