@@ -1,6 +1,6 @@
 #!/bin/sh
 
-docker-compose up -d
+docker compose up -d
 
 aws --endpoint-url=http://localhost:4566 --profile localstack s3 mb s3://hj-202208-image-original
 
