@@ -1,0 +1,25 @@
+log4js:
+  appenders:
+    access:
+      type: dateFile
+      layout:
+        type: pattern
+        pattern: '{"level": "%p","time":"%d{yyyy-MM-dd hh:mm:ss}","message": %m}'
+      filename: ./logs/access.log
+    console:
+      type: console
+      layout:
+        type: pattern
+        pattern: '{"level": "%p","time":"%d{yyyy-MM-dd hh:mm:ss}","message": %m}'
+    stdout:
+      type: stdout
+  categories:
+    default:
+      appenders:
+        - console
+      level: INFO
+    access:
+      appenders:
+        - access
+        - console
+      level: INFO

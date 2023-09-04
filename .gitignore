@@ -3,5 +3,5 @@ services/db/data/
 services/localstack/
 public/uploads/
 public/thumbnail/
-logs/*.log
-
+logs/
+.vscode/
