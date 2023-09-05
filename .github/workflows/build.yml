@@ -29,7 +29,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-
 
-      - uses: aws-actions/configure-aws-credentials@v2
+      - uses: aws-actions/configure-aws-credentials@v3
         with:
           role-to-assume: ${{ env.AWS_ROLE_ARN }}
           aws-region: ap-northeast-1
