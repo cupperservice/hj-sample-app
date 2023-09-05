@@ -7,7 +7,6 @@ on:
 
 env:
   AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
-  ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
   ECR_REPOSITORY: hj-sample-app
 
 permissions:
@@ -38,6 +37,8 @@ jobs:
         id: login-ecr
 
       - uses: docker/build-push-action@v2
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         with:
           context: .
           file: ./Dockerfile
