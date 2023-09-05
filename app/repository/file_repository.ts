@@ -1,4 +1,4 @@
-import UploadImage from '../model/upload_image';
+import UploadImage from '../model/upload_image'
 import blob from '../service/blob'
 import config from '../../config/config'
 

@@ -2,6 +2,8 @@ name: hj-sample-app CI
 
 on:
   push:
+    branches:
+      - main
 
 env:
   AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}

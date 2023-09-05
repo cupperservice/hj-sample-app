@@ -1,4 +1,5 @@
 import { S3, GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3'
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import { Readable } from 'stream'
 import logger from './logger'
 
@@ -30,6 +31,13 @@ class Blob {
     }))
 
     return response.Body!! as Readable
+  }
+
+  async getPresignedUrl(bucket: string, key: string, expiresIn: number) {
+    return await getSignedUrl(this.client, new GetObjectCommand({
+      Bucket: bucket,
+      Key: key,
+    }), { expiresIn })
   }
 }
 

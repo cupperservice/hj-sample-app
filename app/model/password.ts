@@ -1,4 +1,5 @@
 import crypto from 'crypto'
+import Salt from './salt'
 
 export default class Password {
   hashedPassword: string
@@ -11,8 +12,8 @@ export default class Password {
     return this.hashedPassword
   }
 
-  static hashedPassword(plainPassword: string): Password {
-    const hashedPassword = crypto.createHash('sha256').update(plainPassword).digest('hex')
+  static hashedPassword(plainPassword: string, salt: Salt): Password {
+    const hashedPassword = crypto.createHash('sha256').update(`${plainPassword}/${salt.value()}`).digest('hex')
     return new Password(hashedPassword)
   }  
 }
